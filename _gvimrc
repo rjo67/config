@@ -1,0 +1,20 @@
+set guifont=console8x16
+
+" ctrl-c etc
+source $VIMRUNTIME/mswin.vim
+
+set guioptions-=T
+
+" toggle menu bar
+nnoremap <A-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+" toggle tool bar
+nnoremap <A-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
+" toggle RH scrollbar
+nnoremap <A-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
+
+" maximize windows if diff-ing
+if &diff
+   autocmd VimResized * wincmd =
+   autocmd GuiEnter * simalt ~x
+endif
+
