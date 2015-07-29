@@ -19,7 +19,8 @@ set modelines=1 " check last line of file for modeline
 if has("gui_running")
    colorscheme darkblue_mod
 else
-	colorscheme blue
+   " silent used here because gitbash vim doesn't have colours(?)
+	silent! colorscheme blue
 endif
 " }}}
 " spaces and tabs {{{
