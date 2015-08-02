@@ -1,22 +1,29 @@
+#!/bin/bash
+#
+# global bashrc
+#
+# include from the local .bashrc
+#
+
 set -o vi
+
+SCRIPTDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+# read in mycd if available
+[ -r $SCRIPTDIR/mycd.sh ] && . $SCRIPTDIR/mycd.sh
+
 
 # $1  how many times we should go up in the directory hierarchy. Defaults to 3 if not specified.
 up()
 {
-   cnt=$1
-   if [ "x$1" == "x" ]; then
-     cnt=3
-   fi
+   cnt=${1:-3}   # default to 'up 3'
    # want to only perform one 'cd', so that 'cd -' works
-   str="."
-   for (( c=1; c<=$cnt; c++ ))
-   do
-      str=$str"/.."
-   done
-   cd $str
+   str=$(eval "printf '/..'%.0s {1..$cnt}")  # http://rosettacode.org/wiki/Repeat_a_string
+   cd "."$str
 }
 
 ################################
+#
 # aliases
 #
 ################################
@@ -25,13 +32,3 @@ alias up2="up 2"
 alias up3="up 3"
 
 
-export M2_HOME=/c/Users/rich/maven/apache-maven-3.2.5
-export JAVA_HOME=/c/Program\ Files/Java/jdk1.8.0_11
-
-export PATH=$M2_HOME/bin:$JAVA_HOME/bin:$PATH
-
-export PATH=/c/Program\ Files\ \(x86\)/Vim/vim74:$PATH
-
-[ -e ~/mycd.sh ] && . ~/mycd.sh
-
-cd ~/git

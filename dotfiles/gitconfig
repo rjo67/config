@@ -1,0 +1,20 @@
+#
+# shared gitconfig
+#
+# define stuff here which should be available everywhere
+# and include from the local gitconfig using:
+#	[include]
+#		path = ~/git/config/dotfiles/gitconfig
+#
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+[push]
+	default = simple
+[help]
+	autocorrect=20  ; use correct command after 2 seconds
+

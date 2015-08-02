@@ -26,7 +26,6 @@ endif
 " spaces and tabs {{{
 set tabstop=3
 set shiftwidth=3
-" change this for home!
 set expandtab
 " }}}
 " general config {{{
