@@ -12,7 +12,7 @@
 "
 
 set modelines=1 " check last line of file for modeline
-
+execute pathogen#infect()
 
 
 " colours {{{
@@ -51,6 +51,7 @@ set ai "autoindent
 set diffopt=vertical
 " }}}
 " search {{{
+set smartcase " case-sensitive searching if requested
 set incsearch " search as characters are entered
 set hlsearch " highlight matches
 set nowrapscan
@@ -72,11 +73,9 @@ let g:ctrlp_switch_buffer = 0 "always open files in new buffers
 let g:ctrlp_working_path_mode = 0 "ctrlp tracks a change in the working directory
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.git|.svn|target)$',
-  \ 'file': '\v\.(exe|so|dll|class)$',
+  \ 'file': '\v\.(exe|so|dll|class|dita)$',
   \ }
 " }}}
-
-execute pathogen#infect()
 
 if has("gui_running")
    set lines=50

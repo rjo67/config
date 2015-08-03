@@ -22,6 +22,22 @@ up()
    cd "."$str
 }
 
+# git grep
+gg() {
+   [ -z "$1" -o -z "$2" ] && { echo "Usage: gg <search string> <file glob>"; return 1; }
+   search=$1
+   glob=$2
+   shift 2
+   git grep $@ "$search" -- "$glob"
+}
+
+# git-delbranch <branchname>
+git-delbranch()
+{
+  git branch -D $1 && git push origin :$1
+}
+
+
 ################################
 #
 # aliases
