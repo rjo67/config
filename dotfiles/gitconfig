@@ -8,11 +8,13 @@
 #
 
 [alias]
+  br = branch
   co = checkout
   ci = commit
-  st = status
-  br = branch
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  ls = ls-files
+  lol = log --oneline --graph --decorate
+  st = status
 [push]
 	default = simple
 [help]

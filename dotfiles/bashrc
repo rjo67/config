@@ -10,7 +10,10 @@ set -o vi
 SCRIPTDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # read in mycd if available
-[ -r $SCRIPTDIR/mycd.sh ] && . $SCRIPTDIR/mycd.sh
+[ -r $SCRIPTDIR/../mycd.sh ] && . $SCRIPTDIR/../mycd.sh
+
+# maven bash
+[ -r $SCRIPTDIR/..maven_bash_completion.bash ] && . $SCRIPTDIR/../maven_bash_completion.bash
 
 
 # $1  how many times we should go up in the directory hierarchy. Defaults to 3 if not specified.
