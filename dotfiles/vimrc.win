@@ -1,0 +1,97 @@
+" see http://dougblack.io/words/a-good-vimrc.html
+
+" source this file from the local _vimrc using:
+" source <path>\vimrc
+"  (windows style path!)
+
+"
+" *****
+" to reformat text:
+" V=  select text visually (lines), then reformat
+" *****
+"
+
+set modelines=1 " check last line of file for modeline
+execute pathogen#infect()
+
+
+" colours {{{
+if has("gui_running")
+   colorscheme darkblue_mod
+else
+   " silent used here because gitbash vim doesn't have colours(?)
+	silent! colorscheme blue
+endif
+" }}}
+" spaces and tabs {{{
+set tabstop=3
+set shiftwidth=3
+set expandtab
+" }}}
+" general config {{{
+set number
+set noerrorbells visualbell
+set cursorline
+set laststatus=2
+set statusline=%<%f%h%m%r%=%b\ 0x%B\ \ %l,%c%V\ %P
+"lang en
+language mes en
+set langmenu=en_US.UTF-8
+set wildmenu " visual autocomplete for command menu
+set lazyredraw " only redraw screen when necessary
+set showmatch " highlight matching [{()}]
+" jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+syntax on
+filetype indent on
+filetype plugin indent on
+set ai "autoindent
+set diffopt=vertical
+" }}}
+" search {{{
+set smartcase " case-sensitive searching if requested
+set incsearch " search as characters are entered
+set hlsearch " highlight matches
+set nowrapscan
+" }}}
+" folding {{{
+set foldenable          " enable folding
+set foldlevelstart=10   " open most folds by default
+" space open/closes folds (instead of za)
+"nnoremap <space> za
+" }}}
+" nerdtree {{{
+map <C-n> :NERDTreeToggle<CR>
+" close nerdtree if it's the only window left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" }}}
+" ctrlp {{{
+let g:ctrlp_match_window = 'bottom,order:ttb'  "order matching files top to bottom
+let g:ctrlp_switch_buffer = 0 "always open files in new buffers
+let g:ctrlp_working_path_mode = 0 "ctrlp tracks a change in the working directory
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|.svn|target)$',
+  \ 'file': '\v\.(exe|so|dll|class|dita)$',
+  \ }
+" }}}
+
+if has("gui_running")
+   set lines=50
+   set columns=125
+   colorscheme darkblue_mod
+   if &diff
+      autocmd VimResized * wincmd =
+      autocmd GuiEnter * simalt ~x
+      set wrap
+   endif 
+endif
+
+
+
+
+
+
+" fold sections by markers, close every fold by default
+" vim:foldmethod=marker:foldlevel=0
