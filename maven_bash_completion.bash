@@ -105,15 +105,15 @@ _mvn()
     local common_site_lifecycle="pre-site|site|post-site|site-deploy"
     local common_lifecycle_phases="${common_clean_lifecycle}|${common_default_lifecycle}|${common_site_lifecycle}"
 
-    local plugin_goals_appengine="appengine:backends_configure|appengine:backends_delete|appengine:backends_rollback|appengine:backends_start|appengine:backends_stop|appengine:backends_update|appengine:debug|appengine:devserver|appengine:devserver_start|appengine:devserver_stop|appengine:endpoints_get_client_lib|appengine:endpoints_get_discovery_doc|appengine:enhance|appengine:rollback|appengine:set_default_version|appengine:start_module_version|appengine:stop_module_version|appengine:update|appengine:update_cron|appengine:update_dos|appengine:update_indexes|appengine:update_queues|appengine:vacuum_indexes"
-    local plugin_goals_android="android:apk|android:apklib|android:clean|android:deploy|android:deploy-dependencies|android:dex|android:emulator-start|android:emulator-stop|android:emulator-stop-all|android:generate-sources|android:help|android:instrument|android:manifest-update|android:pull|android:push|android:redeploy|android:run|android:undeploy|android:unpack|android:version-update|android:zipalign|android:devices"
+#    local plugin_goals_appengine="appengine:backends_configure|appengine:backends_delete|appengine:backends_rollback|appengine:backends_start|appengine:backends_stop|appengine:backends_update|appengine:debug|appengine:devserver|appengine:devserver_start|appengine:devserver_stop|appengine:endpoints_get_client_lib|appengine:endpoints_get_discovery_doc|appengine:enhance|appengine:rollback|appengine:set_default_version|appengine:start_module_version|appengine:stop_module_version|appengine:update|appengine:update_cron|appengine:update_dos|appengine:update_indexes|appengine:update_queues|appengine:vacuum_indexes"
+#    local plugin_goals_android="android:apk|android:apklib|android:clean|android:deploy|android:deploy-dependencies|android:dex|android:emulator-start|android:emulator-stop|android:emulator-stop-all|android:generate-sources|android:help|android:instrument|android:manifest-update|android:pull|android:push|android:redeploy|android:run|android:undeploy|android:unpack|android:version-update|android:zipalign|android:devices"
     local plugin_goals_ant="ant:ant|ant:clean"
     local plugin_goals_antrun="antrun:run"
     local plugin_goals_archetype="archetype:generate|archetype:create-from-project|archetype:crawl"
     local plugin_goals_assembly="assembly:single|assembly:assembly"
     local plugin_goals_build_helper="build-helper:add-resource|build-helper:add-source|build-helper:add-test-resource|build-helper:add-test-source|build-helper:attach-artifact|build-helper:bsh-property|build-helper:cpu-count|build-helper:help|build-helper:local-ip|build-helper:maven-version|build-helper:parse-version|build-helper:regex-properties|build-helper:regex-property|build-helper:released-version|build-helper:remove-project-artifact|build-helper:reserve-network-port|build-helper:timestamp-property"
     local plugin_goals_buildnumber="buildnumber:create|buildnumber:create-timestamp|buildnumber:help|buildnumber:hgchangeset"
-    local plugin_goals_cargo="cargo:start|cargo:run|cargo:stop|cargo:deploy|cargo:undeploy|cargo:help"
+#    local plugin_goals_cargo="cargo:start|cargo:run|cargo:stop|cargo:deploy|cargo:undeploy|cargo:help"
     local plugin_goals_checkstyle="checkstyle:checkstyle|checkstyle:check"
     local plugin_goals_cobertura="cobertura:cobertura"
     local plugin_goals_findbugs="findbugs:findbugs|findbugs:gui|findbugs:help"
@@ -127,8 +127,8 @@ _mvn()
     local plugin_goals_failsafe="failsafe:integration-test|failsafe:verify"
     local plugin_goals_flyway="flyway:clean|flyway:history|flyway:init|flyway:migrate|flyway:status|flyway:validate"
     local plugin_goals_gpg="gpg:sign|gpg:sign-and-deploy-file"
-    local plugin_goals_grails="grails:clean|grails:config-directories|grails:console|grails:create-controller|grails:create-domain-class|grails:create-integration-test|grails:create-pom|grails:create-script|grails:create-service|grails:create-tag-lib|grails:create-unit-test|grails:exec|grails:generate-all|grails:generate-controller|grails:generate-views|grails:help|grails:init|grails:init-plugin|grails:install-templates|grails:list-plugins|grails:maven-clean|grails:maven-compile|grails:maven-functional-test|grails:maven-grails-app-war|grails:maven-test|grails:maven-war|grails:package|grails:package-plugin|grails:run-app|grails:run-app-https|grails:run-war|grails:set-version|grails:test-app|grails:upgrade|grails:validate|grails:validate-plugin|grails:war"
-    local plugin_goals_gwt="gwt:browser|gwt:clean|gwt:compile|gwt:compile-report|gwt:css|gwt:debug|gwt:eclipse|gwt:eclipseTest|gwt:generateAsync|gwt:help|gwt:i18n|gwt:mergewebxml|gwt:resources|gwt:run|gwt:run-codeserver|gwt:sdkInstall|gwt:source-jar|gwt:soyc|gwt:test"
+#    local plugin_goals_grails="grails:clean|grails:config-directories|grails:console|grails:create-controller|grails:create-domain-class|grails:create-integration-test|grails:create-pom|grails:create-script|grails:create-service|grails:create-tag-lib|grails:create-unit-test|grails:exec|grails:generate-all|grails:generate-controller|grails:generate-views|grails:help|grails:init|grails:init-plugin|grails:install-templates|grails:list-plugins|grails:maven-clean|grails:maven-compile|grails:maven-functional-test|grails:maven-grails-app-war|grails:maven-test|grails:maven-war|grails:package|grails:package-plugin|grails:run-app|grails:run-app-https|grails:run-war|grails:set-version|grails:test-app|grails:upgrade|grails:validate|grails:validate-plugin|grails:war"
+#    local plugin_goals_gwt="gwt:browser|gwt:clean|gwt:compile|gwt:compile-report|gwt:css|gwt:debug|gwt:eclipse|gwt:eclipseTest|gwt:generateAsync|gwt:help|gwt:i18n|gwt:mergewebxml|gwt:resources|gwt:run|gwt:run-codeserver|gwt:sdkInstall|gwt:source-jar|gwt:soyc|gwt:test"
     local plugin_goals_help="help:active-profiles|help:all-profiles|help:describe|help:effective-pom|help:effective-settings|help:evaluate|help:expressions|help:help|help:system"
     local plugin_goals_hibernate3="hibernate3:hbm2ddl|hibernate3:help"
     local plugin_goals_idea="idea:clean|idea:idea"
@@ -140,7 +140,7 @@ _mvn()
     local plugin_goals_jetty="jetty:run|jetty:run-exploded"
     local plugin_goals_jxr="jxr:jxr"
     local plugin_goals_license="license:format|license:check"
-    local plugin_goals_liquibase="liquibase:changelogSync|liquibase:changelogSyncSQL|liquibase:clearCheckSums|liquibase:dbDoc|liquibase:diff|liquibase:dropAll|liquibase:help|liquibase:migrate|liquibase:listLocks|liquibase:migrateSQL|liquibase:releaseLocks|liquibase:rollback|liquibase:rollbackSQL|liquibase:status|liquibase:tag|liquibase:update|liquibase:updateSQL|liquibase:updateTestingRollback"
+#    local plugin_goals_liquibase="liquibase:changelogSync|liquibase:changelogSyncSQL|liquibase:clearCheckSums|liquibase:dbDoc|liquibase:diff|liquibase:dropAll|liquibase:help|liquibase:migrate|liquibase:listLocks|liquibase:migrateSQL|liquibase:releaseLocks|liquibase:rollback|liquibase:rollbackSQL|liquibase:status|liquibase:tag|liquibase:update|liquibase:updateSQL|liquibase:updateTestingRollback"
     local plugin_goals_nexus_staging="nexus-staging:close|nexus-staging:deploy|nexus-staging:deploy-staged|nexus-staging:deploy-staged-repository|nexus-staging:drop|nexus-staging:help|nexus-staging:promote|nexus-staging:rc-close|nexus-staging:rc-drop|nexus-staging:rc-list|nexus-staging:rc-list-profiles|nexus-staging:rc-promote|nexus-staging:rc-release|nexus-staging:release"
     local plugin_goals_pmd="pmd:pmd|pmd:cpd|pmd:check|pmd:cpd-check"
     local plugin_goals_release="release:clean|release:prepare|release:rollback|release:perform|release:stage|release:branch|release:update-versions"
@@ -155,13 +155,15 @@ _mvn()
     local plugin_goals_tomcat="tomcat:help|tomcat:start|tomcat:stop|tomcat:deploy|tomcat:undeploy"
     local plugin_goals_liberty="liberty:create-server|liberty:start-server|liberty:stop-server|liberty:run-server|liberty:deploy|liberty:undeploy|liberty:java-dump-server|liberty:dump-server|liberty:package-server"
     local plugin_goals_versions="versions:display-dependency-updates|versions:display-plugin-updates|versions:display-property-updates|versions:update-parent|versions:update-properties|versions:update-child-modules|versions:lock-snapshots|versions:unlock-snapshots|versions:resolve-ranges|versions:set|versions:use-releases|versions:use-next-releases|versions:use-latest-releases|versions:use-next-snapshots|versions:use-latest-snapshots|versions:use-next-versions|versions:use-latest-versions|versions:commit|versions:revert"
-    local plugin_goals_vertx="vertx:init|vertx:runMod|vertx:pullInDeps|vertx:fatJar"
+#    local plugin_goals_vertx="vertx:init|vertx:runMod|vertx:pullInDeps|vertx:fatJar"
     local plugin_goals_war="war:war|war:exploded|war:inplace|war:manifest"
     local plugin_goals_spring_boot="spring-boot:run|spring-boot:repackage"
     local plugin_goals_jgitflow="jgitflow:feature-start|jgitflow:feature-finish|jgitflow:release-start|jgitflow:release-finish|jgitflow:hotfix-start|jgitflow:hotfix-finish|jgitflow:build-number"
     local plugin_goals_wildfly="wildfly:add-resource|wildfly:deploy|wildfly:deploy-only|wildfly:deploy-artifact|wildfly:redeploy|wildfly:redeploy-only|wildfly:undeploy|wildfly:undeploy-artifact|wildfly:run|wildfly:start|wildfly:shutdown|wildfly:execute-commands"
+# neu hinzugefuegte goals
+	local plugin_goals_surefire_report="surefire-report:failsafe-report-only|surefire-report:help|surefire-report:report|surefire-report:report-only"
 
-    local options="-Dmaven.test.skip=true|-DskipTests|-DskipITs|-Dtest|-Dit.test|-DfailIfNoTests|-Dmaven.surefire.debug|-DenableCiProfile|-Dpmd.skip=true|-Dcheckstyle.skip=true|-Dtycho.mode=maven|-Dmaven.javadoc.skip=true|-Dgwt.compiler.skip|-Dcobertura.skip=true|-Dfindbugs.skip=true||-DperformRelease=true|-Dgpg.skip=true|-DforkCount|-Dmaven.env.properties=PATH"
+    local options="-Dmaven.test.skip=true|-DskipTests|-DskipITs|-Dtest|-Dit.test|-DfailIfNoTests|-Dmaven.surefire.debug|-DenableCiProfile|-Dpmd.skip=true|-Dcheckstyle.skip=true|-Dtycho.mode=maven|-Dmaven.javadoc.skip=true|-Dgwt.compiler.skip|-Dcobertura.skip=true|-Dfindbugs.skip=true||-DperformRelease=true|-Dgpg.skip=true|-DforkCount|-Dmaven.env.properties=|-Dmaven.env.properties=PATH/TO/env.properties|-Dmaven.test.failure.ignore=true"
 
 # haben wir nicht
 #    local profile_settings=`[ -e ~/.m2/settings.xml ] && grep -e "<profile>" -A 1 ~/.m2/settings.xml | grep -e "<id>.*</id>" | sed 's/.*<id>//' | sed 's/<\/id>.*//g' | tr '\n' '|' `
@@ -218,12 +220,12 @@ _mvn()
         done
 
     else
-        if echo "${common_lifecycle_phases}" | tr '|' '\n' | grep -q -e "^${cur}" ; then
+        if echo "${common_lifecycle_phases}" | grep -q "|${cur}" ; then
           COMPREPLY=( $(compgen -S ' ' -W "${common_lifecycle_phases}" -- ${cur}) )
 		else
 		  __common_plugins
 
-          if echo "${common_plugins}" | tr '|' '\n' | grep -q -e "^${cur}"; then
+          if echo "${common_plugins}" | grep -q "|${cur}"; then
             COMPREPLY=( $(compgen -S ':' -W "${common_plugins}" -- ${cur}) )
 		  fi
         fi
