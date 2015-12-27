@@ -17,10 +17,10 @@ execute pathogen#infect()
 
 " colours {{{
 if has("gui_running")
-   colorscheme darkblue_mod
+   colorscheme darkblue
 else
    " silent used here because gitbash vim doesn't have colours(?)
-	silent! colorscheme blue
+	"silent! colorscheme blue
 endif
 " }}}
 " spaces and tabs {{{
@@ -30,12 +30,16 @@ set expandtab
 " }}}
 " general config {{{
 set number
-set noerrorbells visualbell
+"set noerrorbells 
+set visualbell
 set cursorline
-set laststatus=2
-set statusline=%<%f%h%m%r%=%b\ 0x%B\ \ %l,%c%V\ %P
+set ruler                       " show the cursor position all the time
+set backspace=indent,eol,start  " make that backspace key work the way it should
+set laststatus=2                " make the last line where the status is two lines deep so you can see status always
+" Show EOL type and last modified timestamp, right after the filename
+set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 "lang en
-language mes en
+"language mes en
 set langmenu=en_US.UTF-8
 set wildmenu " visual autocomplete for command menu
 set lazyredraw " only redraw screen when necessary
@@ -80,7 +84,6 @@ let g:ctrlp_custom_ignore = {
 if has("gui_running")
    set lines=50
    set columns=125
-   colorscheme darkblue_mod
    if &diff
       autocmd VimResized * wincmd =
       autocmd GuiEnter * simalt ~x
