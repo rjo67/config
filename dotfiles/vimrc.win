@@ -17,10 +17,10 @@ execute pathogen#infect()
 
 " colours {{{
 if has("gui_running")
-   colorscheme darkblue
+   colorscheme darkblue_mod
 else
    " silent used here because gitbash vim doesn't have colours(?)
-	"silent! colorscheme blue
+	silent! colorscheme blue
 endif
 " }}}
 " spaces and tabs {{{
@@ -30,16 +30,12 @@ set expandtab
 " }}}
 " general config {{{
 set number
-"set noerrorbells 
-set visualbell
+set noerrorbells visualbell
 set cursorline
-set ruler                       " show the cursor position all the time
-set backspace=indent,eol,start  " make that backspace key work the way it should
-set laststatus=2                " make the last line where the status is two lines deep so you can see status always
-" Show EOL type and last modified timestamp, right after the filename
-set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
+set laststatus=2
+set statusline=%<%f%h%m%r%=%b\ 0x%B\ \ %l,%c%V\ %P
 "lang en
-"language mes en
+language mes en
 set langmenu=en_US.UTF-8
 set wildmenu " visual autocomplete for command menu
 set lazyredraw " only redraw screen when necessary
@@ -47,7 +43,6 @@ set showmatch " highlight matching [{()}]
 " jump to the last position when reopening a file
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 endif
 syntax on
 filetype indent on
@@ -71,8 +66,6 @@ set foldlevelstart=10   " open most folds by default
 map <C-n> :NERDTreeToggle<CR>
 " close nerdtree if it's the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" ascii style arrows
-let g:NERDTreeDirArrows = 0
 " }}}
 " ctrlp {{{
 let g:ctrlp_match_window = 'bottom,order:ttb'  "order matching files top to bottom
@@ -87,6 +80,7 @@ let g:ctrlp_custom_ignore = {
 if has("gui_running")
    set lines=50
    set columns=125
+   colorscheme darkblue_mod
    if &diff
       autocmd VimResized * wincmd =
       autocmd GuiEnter * simalt ~x

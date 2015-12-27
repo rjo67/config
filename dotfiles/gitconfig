@@ -15,8 +15,11 @@
   ls = ls-files
   lol = log --oneline --graph --decorate
   st = status
+  stu = status -uno
 [push]
 	default = simple
 [help]
 	autocorrect=20  ; use correct command after 2 seconds
+[core]
+	autocrlf = true
 
