@@ -15,7 +15,8 @@
   ls = ls-files
   lol = log --oneline --graph --decorate
   st = status
-  stu = status -uno
+# quick status
+  stq = status -uno
 [push]
 	default = simple
 [help]
