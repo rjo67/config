@@ -17,12 +17,23 @@ SCRIPTDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 
 # $1  how many times we should go up in the directory hierarchy. Defaults to 3 if not specified.
+# special case: if $1='git' then we go up the hierarchy until we reach the toplevel git-repository (where the .git directory is)
 up()
 {
    cnt=${1:-3}   # default to 'up 3'
-   # want to only perform one 'cd', so that 'cd -' works
-   str=$(eval "printf '/..'%.0s {1..$cnt}")  # http://rosettacode.org/wiki/Repeat_a_string
-   cd "."$str
+   if [[ $1 == 'git' ]]; then
+      p=$(git rev-parse --show-cdup)
+      if [[ "x$p" == "x" ]]; then
+         : # empty-string = we're in the git dir already
+           # or there was an error (stderr)
+      else
+         cd $p
+      fi
+   else
+      # want to only perform one 'cd', so that 'cd -' works
+      str=$(eval "printf '/..'%.0s {1..$cnt}")  # http://rosettacode.org/wiki/Repeat_a_string
+      cd "."$str
+   fi
 }
 
 # git grep
@@ -34,10 +45,13 @@ gg() {
    git grep $@ "$search" -- "$glob"
 }
 
-# git-delbranch <branchname>
+# git-delbranch <branchname> <branchname> ...
 git-delbranch()
 {
-  git branch -D $1 && git push origin :$1
+   for br in $@
+   do
+      git branch -D $br && git push origin :$br
+   done
 }
 
 
@@ -46,8 +60,12 @@ git-delbranch()
 # aliases
 #
 ################################
-alias gs="git status"
 alias up2="up 2"
 alias up3="up 3"
 
+alias deptree="mvn dependency:tree"
+alias dtree="mvn dependency:tree"
+
+# http://stackoverflow.com/questions/32553645/git-2-5-2-2-64-bit-cannot-use-vimdiff-when-merge-conflic
+alias gitmerge="MSYS_NO_PATHCONV=1 git mergetool"
 
