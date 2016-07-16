@@ -15,6 +15,88 @@ SCRIPTDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # maven bash
 [ -r $SCRIPTDIR/..maven_bash_completion.bash ] && . $SCRIPTDIR/../maven_bash_completion.bash
 
+# directory list: from fex.belwue.de/fstools/bashrc
+declare -a DIRS
+DIRS[1]="$PWD"
+DIRS[10]=""
+
+adddir() {
+	local i
+	for ((i=1;i<=9;i++)); do
+		test "$1" = "${DIRS[$i]}" && return
+	done
+	for ((i=9;i>1;i--)); do 
+		DIRS[$i]="${DIRS[((i-1))]}"
+	done
+	DIRS[1]="$1"
+}
+
+showdirs() {
+	local i=1
+	while [ "${DIRS[$i]}" ]; do
+		echo "$i: ${DIRS[$i]}"
+		((i++))
+	done
+	echo "-: [remove directory]"
+	echo "s: [save history]"
+	echo "l: [load history]"
+}
+
+removedir() {
+	local d i
+	printf "remove: "
+	read -n 1 d
+	echo
+	if [[ "$d" = [1-9] ]]; then
+		for ((i=$d;i<=9;i++)); do
+			DIRS[$i]="${DIRS[((i+1))]}"
+		done
+	fi
+}
+
+savedirs() {
+	local i=1
+	while [ "${DIRS[$i]}" ]; do
+		echo "${DIRS[$i]}"
+		((i++))
+	done > $HOME/.cdhistory
+}
+
+loaddirs() {
+	local i=1
+	for ((i=1;i<=9;i++)); do
+		read DIRS[$i]
+	done < $HOME/.cdhistory
+}
+
+selectdir() {
+	local d
+	showdirs
+	printf "select: "
+	read -n 1 d
+	echo
+	if [ "$d" = "-" ]; then
+		removedir
+		selectdir
+	elif [ "$d" = "s" ]; then
+		savedirs
+		printf "directory history saved\n\n"
+		selectdir
+	elif [ "$d" = "l" ]; then
+		if [ -f $HOME/.cdhistory ]; then
+			loaddirs
+		else
+			echo "no saved directory history"
+		fi
+		echo
+		selectdir
+	elif [[ "$d" = [1-9] ]]; then
+		cd "${DIRS[$d]}"
+	fi
+}
+
+alias cdh=selectdir
+
 
 # $1  how many times we should go up in the directory hierarchy. Defaults to 3 if not specified.
 # special case: if $1='git' then we go up the hierarchy until we reach the toplevel git-repository (where the .git directory is)
@@ -54,6 +136,10 @@ git-delbranch()
    done
 }
 
+prompt_command() {
+   # remember last directory for history
+	adddir "$OLDPWD"
+}
 
 ################################
 #
@@ -68,4 +154,9 @@ alias dtree="mvn dependency:tree"
 
 # http://stackoverflow.com/questions/32553645/git-2-5-2-2-64-bit-cannot-use-vimdiff-when-merge-conflic
 alias gitmerge="MSYS_NO_PATHCONV=1 git mergetool"
+
+export PROMPT_COMMAND=prompt_command
+
+# key bindings
+bind -x '"\e$":git stq'  # ESC-$ -> git stq
 
