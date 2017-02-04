@@ -148,6 +148,8 @@ alias up3="up 3"
 
 alias deptree="mvn dependency:tree"
 alias depanal="mvn dependency:analyze"
+alias mist="mvn clean install -DskipTests -T3"
+alias mist1="mvn clean install -DskipTests"
 
 # http://stackoverflow.com/questions/32553645/git-2-5-2-2-64-bit-cannot-use-vimdiff-when-merge-conflic
 alias gitmerge="MSYS_NO_PATHCONV=1 git mergetool"
