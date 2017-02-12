@@ -154,6 +154,13 @@ alias mist1="mvn clean install -DskipTests"
 # http://stackoverflow.com/questions/32553645/git-2-5-2-2-64-bit-cannot-use-vimdiff-when-merge-conflic
 alias gitmerge="MSYS_NO_PATHCONV=1 git mergetool"
 
+# gvim.sh is a 'cmd' call:
+#
+#  cmd << EOD
+#  "c:\Program Files (x86)\Vim\vim80\gvim.exe" $@
+#  EOD
+alias gvim=~/git/gvim.sh
+
 export PROMPT_COMMAND=prompt_command
 
 # key bindings

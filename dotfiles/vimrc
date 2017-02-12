@@ -4,16 +4,31 @@
 " source <path>\vimrc
 "  (windows style path!)
 
-"
+" comments, tips and tricks {{{
 " *****
 " to reformat text:
 " V=  select text visually (lines), then reformat
 " *****
-"
-" *****
 " open file under cursor
 " gf                or
 " <ctrl-W>f
+" *****
+" :helpgrep <text> searches for <text> in the help files
+" }}}
+"
+" vimscript tidbits {{{
+" comparing strings in vimscript:
+"   always use ==? (case insensitive) or ==# (case sensitive) instead of plain ==
+" Vimscript functions must start with a capital letter if they are unscoped!
+" Arguments to functions are in argument scope, prefix with a: (see :help function-argument)
+" Local variables should be prefixed with l: (see :help internal-variables)
+" String concat with '.'
+" Always use :normal!, to avoid any key-remappings (ignores char sequences)
+" -- Combine with execute to enter special char sequences e.g. \<cr>
+" Regex: precede with \v to avoid Vimscript's three other crazy regex modes ;-)
+"        precede with \c for case-insensitive
+"
+" }}}
 "
 
 set modelines=1 " check last line of file for modeline
@@ -22,7 +37,7 @@ execute pathogen#infect()
 
 " colours {{{
 if has("gui_running")
-   colorscheme darkblue
+   colorscheme desert
 else
    " silent used here because gitbash vim doesn't have colours(?)
 	silent! colorscheme elflord
@@ -44,8 +59,8 @@ set ruler                       " show the cursor position all the time
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set laststatus=2                " make the last line where the status is two lines deep so you can see status always
 " set status line incrementally
-set statusline=%<%F%h%m%r\		" full path, and various flags (helpfile, modified, readonly)
-set statusline+=[%{&ff}]\		" unix or dos filetype
+set statusline=%<%F%h%m%r\ 	" full path, and various flags (helpfile, modified, readonly)
+set statusline+=[%{&ff}]\ 		" unix or dos filetype
 set statusline+=(%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})  " file time
 set statusline+=%=				" from here on, right aligned fields
 set statusline+=%l/%L			" line number / total line numbers
