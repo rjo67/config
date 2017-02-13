@@ -59,9 +59,9 @@ set ruler                       " show the cursor position all the time
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set laststatus=2                " make the last line where the status is two lines deep so you can see status always
 " set status line incrementally
-set statusline=%<%F%h%m%r\ 	" full path, and various flags (helpfile, modified, readonly)
-set statusline+=[%{&ff}]\ 		" unix or dos filetype
-set statusline+=(%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})  " file time
+set statusline=%<%F%h%m%r        " full path, and various flags (helpfile, modified, readonly)
+set statusline+=\ [%{&ff}]       " unix or dos filetype
+set statusline+=\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})  " file time
 set statusline+=%=				" from here on, right aligned fields
 set statusline+=%l/%L			" line number / total line numbers
 set statusline+=,%c%V\ %P		" column, virtual column, percent
@@ -140,6 +140,7 @@ if has("gui_running")
    set columns=125
    if &diff
       autocmd VimResized * wincmd =
+      " maximize
       autocmd GuiEnter * simalt ~x
       set wrap
    endif 

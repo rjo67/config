@@ -166,3 +166,5 @@ export PROMPT_COMMAND=prompt_command
 # key bindings
 bind -x '"\e$":git stq'  # ESC-$ -> git stq
 
+shopt -s checkwinsize
+
