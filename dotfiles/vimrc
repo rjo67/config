@@ -35,18 +35,31 @@ set modelines=1 " check last line of file for modeline
 execute pathogen#infect()
 
 
-" colours {{{
+" colours and fonts {{{
 if has("gui_running")
-   colorscheme desert
+   set background=light
+   " solarized is what we want, but if it's not there, then use desert
+   silent! colorscheme desert
+   set guifont=Consolas:h11:cANSI
+   " seem to need to set this again...
+   set background=light
+   " no italics
+   let g:solarized_italic=0
+   silent! colorscheme solarized
 else
-   " silent used here because gitbash vim doesn't have colours(?)
 	silent! colorscheme elflord
+	silent! colorscheme evening
 endif
 " }}}
 " spaces and tabs {{{
 set tabstop=3
 set shiftwidth=3
 set expandtab
+" highlight trailing whitespace
+" trailing space can be highlighted with  /\s\+$
+set listchars=trail:.
+set list
+
 " }}}
 " general config {{{
 set relativenumber
@@ -94,6 +107,11 @@ set diffopt=vertical
 nnoremap <leader>ev :split $MYVIMRC<cr>
 " source vimrc quickly ('s'ource 'v'im)
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" jump to tag ctrl-] is not available on DE keyboards
+nnoremap ü <C-]>
+" and jump back
+nnoremap Ü <C-O>
 
 " }}}
 " search {{{

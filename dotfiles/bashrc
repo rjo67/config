@@ -129,7 +129,8 @@ git-delbranch()
 {
    for br in $@
    do
-      git branch -D $br && git push origin :$br
+      git show-ref --verify -q refs/heads/$br  && git branch -D $br
+      git show-ref --verify -q refs/remotes/origin/$br  && git push origin :$br
    done
 }
 
@@ -147,6 +148,8 @@ alias up2="up 2"
 alias up3="up 3"
 
 alias deptree="mvn dependency:tree"
+alias vimdeptree="DISABLE_COLOR_LOGGING=true deptree|gvim -R - &"
+alias DCL="DISABLE_COLOR_LOGGING=true"
 alias depanal="mvn dependency:analyze"
 alias mist="mvn clean install -DskipTests -T3"
 alias mist1="mvn clean install -DskipTests"
