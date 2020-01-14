@@ -99,45 +99,79 @@ alias cdh=selectdir
 # special case: if $1='git' then we go up the hierarchy until we reach the toplevel git-repository (where the .git directory is)
 up()
 {
-   cnt=${1:-3}   # default to 'up 3'
-   if [[ $1 == 'git' ]]; then
-      p=$(git rev-parse --show-cdup)
-      if [[ "x$p" == "x" ]]; then
-         : # empty-string = we're in the git dir already
-           # or there was an error (stderr)
-      else
-         cd $p
-      fi
-   else
-      # want to only perform one 'cd', so that 'cd -' works
-      str=$(eval "printf '/..'%.0s {1..$cnt}")  # http://rosettacode.org/wiki/Repeat_a_string
-      cd "."$str
-   fi
+	cnt=${1:-3}   # default to 'up 3'
+	if [[ $1 == 'git' ]]; then
+		p=$(git rev-parse --show-cdup)
+		if [[ "x$p" == "x" ]]; then
+			: # empty-string = we're in the git dir already
+			  # or there was an error (stderr)
+		else
+			cd $p
+		fi
+	else
+		# want to only perform one 'cd', so that 'cd -' works
+		str=$(eval "printf '/..'%.0s {1..$cnt}")  # http://rosettacode.org/wiki/Repeat_a_string
+		cd "."$str
+	fi
 }
 
 # git grep
 gg() {
-   [ -z "$1" -o -z "$2" ] && { echo "Usage: gg <search string> <file glob>"; return 1; }
-   search=$1
-   glob=$2
-   shift 2
-   git grep $@ "$search" -- "$glob"
+	[ -z "$1" -o -z "$2" ] && { echo "Usage: gg <search string> <file glob>"; return 1; }
+	search=$1
+	glob=$2
+	shift 2
+	git grep $@ "$search" -- "$glob"
 }
 
 # git-delbranch <branchname> <branchname> ...
 git-delbranch()
 {
-   for br in $@
-   do
-      git show-ref --verify -q refs/heads/$br  && git branch -D $br
-      git show-ref --verify -q refs/remotes/origin/$br  && git push origin :$br
-   done
+	for br in $@
+	do
+		git show-ref --verify -q refs/heads/$br  && git branch -D $br
+		git show-ref --verify -q refs/remotes/origin/$br  && git push origin :$br
+	done
 }
 
 prompt_command() {
-   # remember last directory for history
+	# remember last directory for history
 	adddir "$OLDPWD"
 }
+
+# call something (e.g. mvn build) and display ok/failed depending on the RC
+# $1 the command (space separated list of parameters)
+# $2 (optional) will be printed instead of the command
+# $3 (optional) if set, NO time will be printed
+call ()
+{
+	IFS=' ' read -ra ARR <<< "$1"
+
+	# calculate output (time, command)
+	if [ -n "$3" ]; then
+		TIME=" "   # leave a space afterwards
+	else
+		TIME="$(date +"%H:%M:%S") "
+	fi
+	if [ -z "$2" ]; then
+		DESC="${ARR[@]} ..."
+	else
+		DESC="$2"
+	fi
+	printf "%s%s " "$TIME" "$DESC"
+	eval "${ARR[@]}"
+	RC=$?
+	if [ $RC = 0 ]; then 
+		printf '%b%s%b\n' '\033[32;40m' 'ok' '\033[37;40m'
+	else
+		printf '%b%s%b\n' '\033[31;40m' 'failed' '\033[37;40m'
+	fi
+	return $RC
+}
+
+# mvn build
+alias mb="call 'mvn clean install -DskipTests -T3 --builder smart -l build.log'"
+alias mbun="call 'mvn clean install -Punverified -DskipTests -T3 --builder smart -l build.log'"
 
 ################################
 #
@@ -147,8 +181,10 @@ prompt_command() {
 alias up2="up 2"
 alias up3="up 3"
 
-alias deptree="mvn dependency:tree"
+alias deptree="mvn -B dependency:tree"
+alias deptreeruntime="mvn -B dependency:tree -Dscope=runtime"
 alias vimdeptree="DISABLE_COLOR_LOGGING=true deptree|gvim -R - &"
+alias vimdeptreeruntime="DISABLE_COLOR_LOGGING=true deptreeruntime|gvim -R - &"
 alias DCL="DISABLE_COLOR_LOGGING=true"
 alias depanal="mvn dependency:analyze"
 alias mist="mvn clean install -DskipTests -T3"

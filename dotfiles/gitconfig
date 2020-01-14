@@ -14,13 +14,14 @@
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   ls = ls-files
   lol = log --oneline --graph --decorate
+  lop = log --graph  --decorate --pretty=format:'%h %<(80,trunc)%s %<(15,trunc)%an(%ar)'
   st = status
 # quick status
   stq = status -uno
 [push]
 	default = simple
 [help]
-	autocorrect=20  ; use correct command after 2 seconds
+	autocorrect=15  ; use correct command after x tenths of seconds
 [core]
 	autocrlf = true
 	longpaths = true

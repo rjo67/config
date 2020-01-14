@@ -101,6 +101,9 @@ filetype plugin indent on
 set ai "autoindent
 set diffopt=vertical
 
+" set pastetoggle to paste text without sideeffects
+set pastetoggle=<F9>
+
 " set leader
 :let mapleader = ","
 " open vimrc quickly ('e'dit 'v'im)
